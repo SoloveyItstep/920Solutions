@@ -1,0 +1,20 @@
+<kendo-grid [kendoGridBinding]="gridData" [height]="600"
+            [pageable]="{
+            buttonCount: buttonCount,
+            info: info,
+            type: type,
+            pageSizes: [5, 10, 20],
+            previousNext: previousNext
+          }"
+            [sortable]="true"
+            [groupable]="true"
+            [filterable]="true"
+            [pageSize]="10">
+  <kendo-grid-column *ngFor="let col of columns" [field]="col.field"></kendo-grid-column>
+  <kendo-grid-column>
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <button kendoButton (click)="edit(dataItem.id)" style="background-color: lightgrey;">Edit</button><br />
+      <button kendoButton (click)="remove(dataItem.id)" style="background-color: darkred;">Remove</button>
+    </ng-template>
+  </kendo-grid-column>
+</kendo-grid>

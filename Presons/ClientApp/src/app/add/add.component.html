@@ -1,0 +1,82 @@
+<form novalidate [formGroup]="personForm">
+  <div class="form-group" [ngClass]="{'has-danger': firstName.invalid && (firstName.dirty || firstName.touched),
+       'has-success': firstName.valid && (firstName.dirty || firstName.touched)}">
+    <label>First Name</label>
+    <input type="text" class="form-control" formControlName="firstName" required>
+    <div class="form-control-feedback" *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+      <p *ngIf="firstName.errors.required">First Name is required</p>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-danger': lastName.invalid && (lastName.dirty || lastName.touched),
+       'has-success': lastName.valid && (lastName.dirty || lastName.touched)}">
+    <label>Last Name</label>
+    <input type="text" class="form-control" formControlName="lastName" required>
+    <div class="form-control-feedback" *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+      <p *ngIf="lastName.errors.required">Last Name is required</p>
+    </div>
+  </div>
+
+  <div formGroupName="personalNumbers">
+    <div class="form-group" [ngClass]="{'has-danger': personalNumber.invalid && (personalNumber.dirty || personalNumber.touched),
+         'has-success': personalNumber.valid && (personalNumber.dirty || personalNumber.touched)}">
+      <label>Personal Number</label>
+      <input type="number" class="form-control" formControlName="personalNumber" required>
+      <div class="form-control-feedback" *ngIf="personalNumber.errors && (personalNumber.dirty || personalNumber.touched)">
+        <p *ngIf="personalNumber.errors.maxlength">Max length is 11</p>
+        <p *ngIf="personalNumber.errors.pattern">Only digits alowed</p>
+        <p *ngIf="personalNumber.errors.required">Min digit value is required</p>
+      </div>
+    </div>
+
+    <div class="form-group" [ngClass]="{'has-danger': personalNumberDuplicate.invalid && (personalNumberDuplicate.dirty || personalNumberDuplicate.touched) || isEqual,
+         'has-success': personalNumberDuplicate.valid && (personalNumberDuplicate.dirty || personalNumberDuplicate.touched)}">
+      <label>Repeat Personal Number</label>
+      <input type="number" class="form-control" (ngModelChange)="duplicateChange($event)" formControlName="personalNumberDuplicate" required>
+      <div class="form-control-feedback" *ngIf="personalNumberDuplicate.errors && (personalNumberDuplicate.dirty || personalNumberDuplicate.touched) || isEqual">
+        <p *ngIf="personalNumberDuplicate.errors?.maxlength">Max length is 11</p>
+        <p *ngIf="personalNumberDuplicate.errors?.pattern">Only digits alowed</p>
+        <p *ngIf="personalNumberDuplicate.errors?.required">Min digit value is required</p>
+        <p *ngIf="isEqual">Have to be equal to Personal Number</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-danger': birthdate.invalid && (birthdate.dirty || birthdate.touched),
+         'has-success': birthdate.valid && (birthdate.dirty || birthdate.touched)}">
+    <label>BirthDate</label><br />
+
+    <kendo-datepicker [(ngModel)]="value"
+                      [format]="'dd/MM/yyyy'"
+                      [value]="value"
+                      formControlName="birthdate">
+    </kendo-datepicker>
+    <div class="form-control-feedback" *ngIf="birthdate.errors && (birthdate.dirty || birthdate.touched)">
+      <p *ngIf="birthdate.errors.pattern">Date format need to by equal to  dd/mm/yyyy</p>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="{'has-danger': salary.invalid && (salary.dirty || salary.touched),
+         'has-success': salary.valid && (salary.dirty || salary.touched)}">
+    <label>Salary</label>
+    <input type="number" class="form-control" formControlName="salary" required>
+    <div class="form-control-feedback" *ngIf="salary.errors && (salary.dirty || salary.touched)">
+      <p *ngIf="personalNumberDuplicate.errors?.pattern">Only digits alowed</p>
+      <p *ngIf="personalNumberDuplicate.errors?.required">Invalid money format</p>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="'has-success'">
+    <label>Gender</label>
+    <select class="form-control"
+            formControlName="gender">
+      <option value="">Please select your gender</option>
+      <option [value]="0">Male</option>
+      <option [value]="1">Female</option>
+    </select>
+  </div>
+
+  <button type="submit" (click)="onSubmit()" kendoButton class="btn btn-primary">Create</button>
+</form>
+
+

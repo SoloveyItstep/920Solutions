@@ -1,0 +1,18 @@
+@import "~@progress/kendo-theme-default/scss/all";
+/*@import "~@progress/kendo-theme-default/scss/button";
+@import "~@progress/kendo-theme-default/scss/datetime";
+@import "~@progress/kendo-theme-default/scss/grid";
+@import "~@progress/kendo-theme-default/dist/all.css";
+@import "~@progress/kendo-theme-default/scss/panelbar";*/
+
+.has-danger, p {
+  color: #d91c5c;
+}
+
+.has-success {
+  color: #1a2358;
+}
+
+form{
+  max-width: 450px;
+  }
